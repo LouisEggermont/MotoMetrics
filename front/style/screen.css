@@ -1,0 +1,1030 @@
+/*---------------------------------------/*
+ # Imports
+/*---------------------------------------*/
+@font-face {
+  font-family: BebasNueLocal;
+  src: url("./fonts/bebas-neue-pro-regular.otf") format("opentype");
+}
+@font-face {
+  font-family: BebasNueLocal;
+  font-weight: bold;
+  src: url("./fonts/bebas-neue-pro-bold.otf") format("opentype");
+}
+@font-face {
+  font-family: RobotoLocal;
+  font-weight: normal;
+  src: url("./fonts/roboto-regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: RobotoLocal;
+  font-weight: bold;
+  src: url("./fonts/roboto-bold.ttf") format("truetype");
+}
+/*---------------------------------------/*
+ # TOOLS
+/*---------------------------------------*/
+/*---------------------------------------/*
+ # SETTINGS
+/*---------------------------------------*/
+/*---------------------------------------/*
+ # GENERIC
+/*---------------------------------------*/
+:not(.odometer, .odometer > *) {
+  box-sizing: border-box;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/*---------------------------------------/*
+ # ELEMENTS
+/*---------------------------------------*/
+/*
+    Elements: Page
+    ---
+    Default markup for page level elements
+*/
+html {
+  font-size: 87.5%;
+  line-height: 1.7142857143;
+  font-family: RobotoLocal, sans-serif;
+  color: #495057;
+  scroll-behavior: smooth;
+  background-color: #f8f9fa;
+}
+
+/*
+    Customize the background color and color to match your design.
+*/
+::-moz-selection {
+  background: #cb3435;
+  color: white;
+}
+::selection {
+  background: #cb3435;
+  color: white;
+}
+
+/*
+    Elements: typography
+    ---
+    Default markup for typographic elements
+*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
+  color: #212529;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 1.6018066406rem;
+  line-height: 2.8571428571rem;
+  margin-bottom: 1.7142857143rem;
+}
+
+h2 {
+  font-size: 1.265625rem;
+  line-height: 1.7142857143rem;
+  margin-bottom: 1.7142857143rem;
+}
+
+h3 {
+  font-size: 1rem;
+  line-height: 1.7142857143rem;
+  margin-bottom: 1.7142857143rem;
+}
+
+h4,
+h5,
+h6 {
+  font-size: 1rem;
+  line-height: 1.7142857143rem;
+  margin-bottom: 1.7142857143rem;
+}
+
+p,
+ol,
+ul,
+dl,
+table,
+address,
+figure {
+  margin-bottom: 1.7142857143rem;
+}
+
+ul,
+ol {
+  margin-left: 1.7142857143rem;
+}
+
+li ul,
+li ol {
+  margin-bottom: 0;
+}
+
+blockquote {
+  font-style: italic;
+  font-size: 1.423828125rem;
+  line-height: 2.2857142857rem;
+  margin-bottom: 1.7142857143rem;
+}
+
+figcaption {
+  font-size: 0.8888888889rem;
+  line-height: 1.1428571429rem;
+  margin-top: 0.8571428571rem;
+  color: #868e96;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #dee2e6;
+  margin-bottom: 1.7142857143rem;
+}
+
+a {
+  color: #be0103;
+  transition: all 0.1s ease-in-out;
+}
+
+a:hover {
+  color: #cb3435;
+}
+
+a:active {
+  color: #850102;
+}
+
+/*---------------------------------------/*
+ # OBJECTS
+/*---------------------------------------*/
+/*
+    Objects: list reset
+    ---
+    Resets the default list styles
+*/
+.o-list-reset {
+  list-style: none;
+  margin-left: 0;
+}
+
+/*
+    Object: Button reset
+    ---
+    Small button reset object
+*/
+.o-button-reset {
+  display: inline-block;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: inherit;
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
+}
+
+/*
+    Objects: Row
+    ---
+    Creates a horizontal row with padding
+*/
+.o-row {
+  padding: 1.7142857143rem 1.7142857143rem 0;
+  display: flow-root;
+}
+
+.o-row--primary {
+  background: #850102;
+}
+
+.o-row--grey-dark {
+  background-color: get-color(color-gray, 800);
+  color: white;
+}
+
+.o-row--xs {
+  padding-top: 0.8571428571rem;
+  padding-bottom: 0.8571428571rem;
+}
+
+@media (min-width: 48.0625em) {
+  .o-row--l {
+    padding: 3.4285714286rem 1.7142857143rem 1.7142857143rem;
+  }
+}
+
+.o-row--header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+}
+
+/*
+    Objects: Container
+    ---
+    Creates a horizontal container that sets de global max-width
+*/
+.o-container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 87.4285714286rem;
+}
+
+/*
+    Objects: Layout
+    ---
+    The layout object provides us with a column-style layout system. This object
+    contains the basic structural elements, but classes should be complemented
+    with width utilities
+*/
+.o-layout {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.o-layout__item {
+  flex-basis: 100%;
+}
+
+/* gutter modifiers, these affect o-layout__item too */
+.o-layout--gutter {
+  margin-left: -0.8571428571rem;
+  margin-right: -0.8571428571rem;
+}
+
+.o-layout--gutter > .o-layout__item {
+  padding-left: 0.8571428571rem;
+  padding-right: 0.8571428571rem;
+}
+
+.o-layout--gutter-s {
+  margin-left: -0.5714285714rem;
+  margin-right: -0.5714285714rem;
+}
+
+.o-layout--gutter-s > .o-layout__item {
+  padding-left: 0.5714285714rem;
+  padding-right: 0.5714285714rem;
+}
+
+.o-layout--gutter-l {
+  margin-left: -1.1428571429rem;
+  margin-right: -1.1428571429rem;
+}
+
+.o-layout--gutter-l > .o-layout__item {
+  padding-left: 1.1428571429rem;
+  padding-right: 1.1428571429rem;
+}
+
+/* reverse horizontal row modifier */
+.o-layout--row-reverse {
+  flex-direction: row-reverse;
+}
+
+.o-layout--collumn {
+  flex-direction: column;
+}
+
+/* Horizontal alignment modifiers*/
+.o-layout--justify-start {
+  justify-content: flex-start;
+}
+
+.o-layout--justify-end {
+  justify-content: flex-end;
+}
+
+.o-layout--justify-center {
+  justify-content: center;
+}
+
+.o-layout--justify-space-around {
+  justify-content: space-around;
+}
+
+.o-layout--justify-space-evenly {
+  justify-content: space-evenly;
+}
+
+.o-layout--justify-space-between {
+  justify-content: space-between;
+}
+
+/* Vertical alignment modifiers */
+.o-layout--align-start {
+  align-items: flex-start;
+}
+
+.o-layout--align-end {
+  align-items: flex-end;
+}
+
+.o-layout--align-center {
+  align-items: center;
+}
+
+.o-layout--align-baseline {
+  align-items: baseline;
+}
+
+/* Vertical alignment modifiers that only work if there is one than one flex item */
+.o-layout--align-content-start {
+  align-content: start;
+}
+
+.o-layout--align-content-end {
+  align-content: end;
+}
+
+.o-layout--align-content-center {
+  align-content: center;
+}
+
+.o-layout--align-content-space-around {
+  align-content: space-around;
+}
+
+.o-layout--align-content-space-between {
+  align-content: space-between;
+}
+
+/*------------------------------------*\
+  #COMPONENTS
+\*------------------------------------*/
+/*
+  Components: icon buttons
+  ---
+  The icon button component is used to display a button with an icon
+*/
+.c-title {
+  font-family: BebasNueLocal;
+  font-weight: bold;
+}
+.c-title--index {
+  font-size: 3.2473210255rem;
+}
+
+.c-dashboard {
+  text-align: center;
+  font-size: 2.0272865295rem;
+  font-weight: normal;
+}
+.c-dashboard--curr-time {
+  margin-top: 1.7142857143rem;
+  margin-bottom: 0;
+  font-size: 2.8865075782rem;
+  line-height: 1;
+}
+.c-dashboard--past-time {
+  margin-bottom: 0;
+  font-size: 1.423828125rem;
+  font-weight: light;
+}
+.c-dashboard--degrees {
+  margin-top: 1.7142857143rem;
+  font-weight: bold;
+  font-size: 3.6532361537rem;
+  margin-bottom: 0;
+}
+.c-dashboard--speed {
+  margin-bottom: 0;
+}
+.c-dashboard--speed, .c-dashboard--g-force {
+  font-size: 2.2806973457rem;
+}
+.c-dashboard--temp-eng {
+  margin-bottom: 0;
+  line-height: 1;
+}
+
+.c-icon-button {
+  display: flex;
+  align-items: center;
+}
+.c-icon-button svg {
+  fill: currentColor;
+}
+
+/*
+  Components: Logo
+  ---
+  The logo component is used to display the logo of the site
+*/
+.c-logo {
+  margin-bottom: 0;
+}
+
+.c-logo__link {
+  display: block;
+  height: 2.2857142857rem;
+}
+
+.c-logo__symbol {
+  display: block;
+  height: 100%;
+  width: auto;
+  fill: #fff5f5;
+}
+.c-logo__symbol:hover {
+  fill: #ffe3e3;
+}
+
+/*
+  Components: Header
+  ---
+  The header component is used to display the header of the site
+*/
+.c-header {
+  display: flex;
+  align-items: center;
+  gap: 1.7142857143rem;
+}
+@media (max-width: 36.0625em) {
+  .c-header {
+    justify-content: space-between;
+  }
+}
+
+.c-header__user {
+  height: 2.2857142857rem;
+  border-radius: 100%;
+}
+@media (min-width: 36.0625em) {
+  .c-header__user {
+    margin-left: auto;
+  }
+}
+
+.c-header__menu-button {
+  color: white;
+}
+@media (min-width: 36.0625em) {
+  .c-header__menu-button {
+    display: none;
+  }
+}
+
+/*
+  Components: Nav
+  ---
+  The nav component is used to display the navigation of the site
+*/
+@media (max-width: 36.0625em) {
+  .c-nav--header {
+    display: none;
+  }
+}
+
+.c-nav__title {
+  font-size: 1rem;
+  color: currentColor;
+  margin-bottom: 0;
+}
+
+.c-nav__header {
+  display: flex;
+  align-items: center;
+  gap: 1.7142857143rem;
+  justify-content: space-between;
+  margin-bottom: 1.7142857143rem;
+}
+
+.c-nav__list {
+  margin-bottom: 0;
+}
+.c-nav--header .c-nav__list {
+  display: flex;
+  gap: 2.2857142857rem;
+  align-items: center;
+}
+
+.c-nav__link:-moz-any-link {
+  display: flex;
+  font-weight: 600;
+  color: #fff5f5;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.c-nav__link:any-link {
+  display: flex;
+  font-weight: 600;
+  color: #fff5f5;
+  text-decoration: none;
+  border-radius: 6px;
+}
+.c-nav__item--active .c-nav__link:-moz-any-link {
+  color: #fff5f5;
+  background-color: #390001;
+  padding: 0.5714285714rem 1.1428571429rem;
+}
+.c-nav__item--active .c-nav__link:any-link {
+  color: #fff5f5;
+  background-color: #390001;
+  padding: 0.5714285714rem 1.1428571429rem;
+}
+.c-nav--mobile .c-nav__link:-moz-any-link {
+  padding: 0.5714285714rem 1.1428571429rem;
+}
+.c-nav--mobile .c-nav__link:any-link {
+  padding: 0.5714285714rem 1.1428571429rem;
+}
+
+.c-nav__link:hover {
+  color: #fff5f5;
+}
+
+/*
+    Components: Buttons
+    ---
+    The button component is used to display buttons
+*/
+.c-button:-moz-any-link {
+  display: inline-block;
+  padding: 0.5714285714rem 1.1428571429rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff5f5;
+  background-color: #850102;
+  border: 1px solid #850102;
+  -moz-transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+}
+.c-button,
+.c-button:any-link {
+  display: inline-block;
+  padding: 0.5714285714rem 1.1428571429rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff5f5;
+  background-color: #850102;
+  border: 1px solid #850102;
+  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+}
+.c-button:-moz-any-link:hover {
+  background-color: #be0103;
+}
+.c-button:hover,
+.c-button:any-link:hover {
+  background-color: #be0103;
+}
+
+.c-button--meta:-moz-any-link {
+  color: #495057;
+  background-color: white;
+  border-color: #ced4da;
+}
+
+.c-button--meta,
+.c-button--meta:any-link {
+  color: #495057;
+  background-color: white;
+  border-color: #ced4da;
+}
+.c-button--meta:-moz-any-link:hover {
+  background-color: #f8f9fa;
+}
+.c-button--meta:hover,
+.c-button--meta:any-link:hover {
+  background-color: #f8f9fa;
+}
+
+/*
+    Components: Card
+    ---
+    The card component is used to display a card
+*/
+.c-card {
+  display: flow-root;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.7142857143rem;
+  width: 100%;
+  color: #495057;
+  text-decoration: none;
+}
+@media (min-width: 36.0625em) {
+  .c-card--ride {
+    margin-right: 1.1428571429rem;
+    width: calc(50% - 1.1428571429rem);
+  }
+}
+@media (min-width: 36.0625em) {
+  .c-card--rides {
+    width: calc(50% - 1.1428571429rem);
+    margin-right: 1.1428571429rem;
+  }
+}
+@media (min-width: 62.0625em) {
+  .c-card--rides {
+    width: calc(33% - 1.1428571429rem);
+  }
+}
+.c-card--rides:hover {
+  color: #495057;
+}
+.c-card--rides:hover .c-card__title {
+  color: #be0103;
+}
+@media (min-width: 62.0625em) {
+  .c-card--ridecontainer {
+    width: 70%;
+  }
+}
+.c-card p {
+  margin-bottom: 0;
+}
+.c-card__preview {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.8571428571rem 0;
+  padding: 0 0.5714285714rem;
+}
+.c-card__preview p {
+  margin-left: 0.5714285714rem;
+}
+.c-card__title {
+  font-weight: bold;
+  font-size: 1.8020324707rem;
+  transition: 0.1s;
+}
+.c-card__value {
+  margin-right: 1.7142857143rem;
+  font-size: 1.423828125rem;
+}
+.c-card__content {
+  padding: 0.5714285714rem 0.8571428571rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+g .c-card__content + .c-card__content {
+  border-top: 1px solid #dee2e6;
+}
+.c-card__content--ridetitle {
+  justify-content: flex-start;
+}
+.c-card__content--ridetitle img {
+  width: 2rem;
+  margin-left: 0.5714285714rem;
+}
+
+.o-ride_head__title {
+  line-height: 1;
+  margin-bottom: 0.5714285714rem;
+}
+.o-ride_head__distance {
+  font-size: 2.0272865295rem;
+}
+.o-ride_head__datetime {
+  font-size: 1.423828125rem;
+}
+
+.o-ride_info {
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 62.0625em) {
+  .o-ride_info {
+    flex-direction: row;
+  }
+}
+
+.c-intro {
+  flex-direction: column;
+}
+@media (min-width: 62.0625em) {
+  .c-intro {
+    flex-direction: row;
+    margin-bottom: 1.7142857143rem;
+  }
+}
+.c-intro--text {
+  text-align: center;
+}
+.c-intro--text p {
+  width: 80%;
+  align-items: center;
+}
+@media (min-width: 62.0625em) {
+  .c-intro--text {
+    align-items: start;
+    text-align: left;
+  }
+}
+
+.o-options p {
+  margin-bottom: 0;
+}
+.o-options > div:first-of-type {
+  margin-right: 3.4285714286rem;
+}
+.o-options__title {
+  font-weight: bold;
+  margin-bottom: 0;
+  font-size: 2.0272865295rem;
+}
+.o-options__slider,
+.o-options .c-switch {
+  margin-left: 0.8571428571rem;
+}
+.o-options__slider {
+  opacity: 0;
+}
+.o-options .show {
+  opacity: 1;
+}
+.o-options input[type=range] {
+  opacity: 1;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 8px;
+  background-color: lightgray;
+  border-radius: 4px;
+}
+.o-options input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background-color: #850102;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -4px;
+}
+.o-options input[type=range]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background-color: #850102;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -4px;
+}
+.o-options input[type=range]::-webkit-slider-runnable-track {
+  height: 8px;
+  background-color: #ff8787;
+  border-radius: 4px;
+}
+.o-options input[type=range]::-moz-range-track {
+  height: 8px;
+  background-color: #ff8787;
+  border-radius: 4px;
+}
+@media (min-width: 48.0625em) {
+  .o-options {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 48.0625em) {
+  .o-status-content {
+    flex-wrap: nowrap;
+  }
+}
+
+.o-bike-image {
+  margin: 2.2857142857rem;
+  display: grid;
+  max-width: 40rem;
+}
+.o-bike-image img {
+  grid-row: 1;
+  grid-column: 1;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.o-bike-image .bike {
+  opacity: 1;
+}
+.o-bike-image .show {
+  opacity: 1;
+}
+
+.c-switch {
+  display: flex;
+  margin-bottom: 0.5714285714rem;
+}
+.c-switch input {
+  position: absolute !important;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  width: 1px;
+  border: 0;
+  overflow: hidden;
+}
+.c-switch label {
+  background-color: #ffffff;
+  line-height: 1;
+  text-align: center;
+  padding: 0.5714285714rem 1.7142857143rem;
+  margin-right: -1px;
+  border: 1px solid #dee2e6;
+  transition: all 0.1s ease-in-out;
+}
+.c-switch label:hover {
+  cursor: pointer;
+}
+.c-switch label:first-of-type {
+  border-radius: 4px 0 0 4px;
+}
+.c-switch label:last-of-type {
+  border-radius: 0 4px 4px 0;
+}
+.c-switch input:checked + label {
+  background-color: #cb3435;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.odometer {
+  margin: 0 auto;
+  font-size: 13vw;
+  height: 1em;
+  width: -moz-min-content;
+  width: min-content;
+  line-height: 0;
+  box-sizing: content-box !important;
+  display: flex;
+  background: #222;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.9);
+}
+@media (min-width: 48.0625em) {
+  .odometer {
+    font-size: 8vw;
+  }
+}
+@media (min-width: 48.0625em) and (min-width: 75.0625em) {
+  .odometer {
+    font-size: 5vw;
+  }
+}
+
+.digit {
+  display: inline-block;
+  height: 1em;
+  width: 0.59em;
+  overflow: hidden;
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0 0.2em;
+}
+.digit:first-child {
+  border-left: none;
+}
+.digit:last-child {
+  border-right: none;
+}
+
+.digit-container {
+  line-height: 1em;
+  animation: slide 1 cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.digit-one {
+  animation-duration: 750ms;
+}
+
+.digit-ten {
+  animation-duration: 1000ms;
+}
+
+.digit-hundred {
+  animation-duration: 1250ms;
+}
+
+.digit-one-thousands {
+  animation-duration: 1500ms;
+}
+
+.digit-ten-thousands {
+  animation-duration: 1750ms;
+}
+
+.digit-hundred-thousands {
+  animation-duration: 2000ms;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateY(-10em);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+/*
+  Components: mobile nav
+  ---
+  The mobile nav component is used to display the mobile navigation
+*/
+.c-mobile-nav {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  overflow-y: auto;
+  padding-right: 1.7142857143rem;
+}
+
+.c-mobile-nav__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: black;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.c-mobile-nav__body {
+  position: relative;
+  background-color: #850102;
+  color: white;
+  padding: 1.7142857143rem;
+  height: 100%;
+  opacity: 0;
+  translate: -100% 0;
+  transition: all 0.2s ease;
+}
+
+/*
+  State: has-mobile-nav
+  ---
+  The has-mobile-nav state is to show the mobile nav and to prevent the body from scrolling when the mobile nav is open
+*/
+.has-mobile-nav .c-mobile-nav {
+  pointer-events: all;
+}
+.has-mobile-nav .c-mobile-nav__body {
+  opacity: 1;
+  translate: none;
+}
+.has-mobile-nav .c-mobile-nav__overlay {
+  opacity: 0.5;
+}
+
+.c-weather--description {
+  text-transform: capitalize;
+}
+.c-weather--temp {
+  font-weight: bold;
+  font-size: 2.565784514rem;
+  margin-bottom: 0;
+}
+.c-weather--location {
+  margin-bottom: 0.8571428571rem;
+}
+
+/*---------------------------------------/*
+ # UTILITIES
+/*---------------------------------------*/
+#mapid {
+  width: 100%;
+  padding-top: 60%;
+  z-index: 0;
+  margin-bottom: 3.4285714286rem;
+}
+@media (min-width: 48.0625em) {
+  #mapid {
+    padding-top: 40%;
+  }
+}/*# sourceMappingURL=screen.css.map */

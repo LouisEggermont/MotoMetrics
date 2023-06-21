@@ -1,0 +1,1196 @@
+/*---------------------------------------/*
+ # Imports
+/*---------------------------------------*/
+
+@import "open-color";
+// @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;900&display=swap");
+
+// @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+@font-face {
+  font-family: BebasNueLocal;
+  src: url("./fonts/bebas-neue-pro-regular.otf") format("opentype");
+}
+@font-face {
+  font-family: BebasNueLocal;
+  font-weight: bold;
+  src: url("./fonts/bebas-neue-pro-bold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: RobotoLocal;
+  font-weight: normal;
+  src: url("./fonts/roboto-regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: RobotoLocal;
+  font-weight: bold;
+  src: url("./fonts/roboto-bold.ttf") format("truetype");
+}
+
+// @font-face {
+//   font-family: GraublauWeb;
+//   font-weight: bold;
+//   src: url("path/GraublauWebBold.otf") format("opentype");
+// }
+/*---------------------------------------/*
+ # TOOLS
+/*---------------------------------------*/
+
+//
+// Media Query mixin
+// @include mq(#point, #query1, #query2);
+//
+
+@mixin mq($breakpoint, $query1: min, $query2: width) {
+  $query: map-get($breakpoints, $breakpoint);
+
+  @if $query != null {
+    @media (#{$query1}-#{$query2}: #{$query}) {
+      @content;
+    }
+  } @else {
+    @media (#{$query1}-#{$query2}: $breakpoint) {
+      @content;
+    }
+  }
+}
+
+/*---------------------------------------/*
+ # SETTINGS
+/*---------------------------------------*/
+
+// ---
+// Settings: Colors
+// ---
+
+$color-text: $oc-gray-9;
+$color-text-light: $oc-gray-7;
+$color-text-lighter: $oc-gray-6;
+
+$color-primary: $oc-red-6;
+$color-primary-light: $oc-red-5;
+$color-primary-lighter: $oc-red-4;
+$color-primary-dark: $oc-red-7;
+
+$color-border: $oc-gray-3;
+$color-border-light: $oc-gray-2;
+$color-border-dark: $oc-gray-4;
+
+$color-succes: $oc-green-5;
+$color-succes-light: $oc-green-4;
+$color-succes-lighter: $oc-green-3;
+$color-succes-lightest: $oc-green-1;
+$color-succes-dark: $oc-green-6;
+$color-succes-darker: $oc-green-7;
+$color-succes-darkest: $oc-green-8;
+
+// ---
+// Settings: radii
+// ---
+
+$radius: 4px;
+$radius-m: 6px;
+$radius-l: 8px;
+
+// ---
+// Settings: Typography
+// ---
+
+$root-font-size: 14;
+
+// modular scale ratio
+$ratio: 1.125;
+
+// font-sizes
+$ms0: 1rem; // 14px
+$ms-1: calc($ms0 / $ratio); // 12px
+$ms-2: calc($ms-1 / $ratio); // 11px
+$ms1: calc($ms0 * $ratio); // 16px
+$ms2: calc($ms1 * $ratio); // 18px
+$ms3: calc($ms2 * $ratio); // 20px
+$ms4: calc($ms3 * $ratio); // 22px
+$ms5: calc($ms4 * $ratio); // 25px
+$ms6: calc($ms5 * $ratio); // 28px
+$ms7: calc($ms6 * $ratio); // 32px
+$ms8: calc($ms7 * $ratio); // 36px
+$ms9: calc($ms8 * $ratio); // 40px
+$ms10: calc($ms9 * $ratio); // 45px
+$ms11: calc($ms10 * $ratio); // 51px
+
+$font-family-primary: RobotoLocal, sans-serif;
+
+// ---
+// Settings: Spacing
+// ---
+
+// baseline unit
+$baseline: calc(8 / $root-font-size * 1rem);
+
+// spacing scale
+$space-xxs: calc($baseline * 0.5); // 4px
+$space-xxs: calc($baseline * 1); // 8px
+$space-xs: calc($baseline * 1.5); // 12px
+$space-s: calc($baseline * 2); // 16px
+$space-m: calc($baseline * 3); // 24px
+$space-l: calc($space-s * 2); // 32px
+$space-xl: calc($space-m * 2); // 48px
+$space-xxl: calc($space-l * 2); // 64px
+$space-xxxl: calc($space-xl * 2); // 96px
+
+// ---
+// Breakpoints
+// ---
+
+$breakpoints: (
+  bp1: calc(577 / 16 * 1em),
+  bp2: calc(769 / 16 * 1em),
+  bp3: calc(993 / 16 * 1em),
+  bp4: calc(1201 / 16 * 1em),
+  bp5: calc(1401 / 16 * 1em),
+) !default;
+
+$container-max-width: calc(1224 / $root-font-size * 1rem);
+
+// The gutter between columns
+$grid-gutter: $space-m;
+$grid-gutter-s: $space-s;
+$grid-gutter-l: $space-l;
+
+// Define the amount of columns in the grid
+$columns: (2, 3, 4, 5, 6) !default;
+
+/*---------------------------------------/*
+ # GENERIC
+/*---------------------------------------*/
+// *,
+// *:before,
+// *:after {
+//   // Reset box-sizing
+//   box-sizing: border-box;
+// }
+:not(.odometer, .odometer > *) {
+  box-sizing: border-box; // Apply border-box to all elements except .odometer
+}
+
+* {
+  // Reset margin and font-size
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  // font-weight: normal;
+}
+
+img,
+svg {
+  display: block; // make images block level elements
+  max-width: 100%; // make images responsive
+}
+
+/*---------------------------------------/*
+ # ELEMENTS
+/*---------------------------------------*/
+
+/*
+    Elements: Page
+    ---
+    Default markup for page level elements
+*/
+
+html {
+  font-size: calc($root-font-size / 16 * 100%);
+  line-height: calc(24 / $root-font-size); // 24px
+  font-family: $font-family-primary; // global font-family
+  color: $color-text-light; // global text color
+  scroll-behavior: smooth; // smooth scrolling
+  background-color: $oc-gray-0;
+}
+
+/*
+    Customize the background color and color to match your design.
+*/
+
+::selection {
+  background: $color-primary-light; // background color
+  color: white; // text color
+}
+
+/*
+    Elements: typography
+    ---
+    Default markup for typographic elements
+*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
+  color: $color-text;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: $ms4;
+  line-height: calc($baseline * 5);
+  margin-bottom: $space-m;
+}
+
+h2 {
+  font-size: $ms2;
+  line-height: calc($baseline * 3);
+  margin-bottom: $space-m;
+}
+
+h3 {
+  font-size: $ms0;
+  line-height: calc($baseline * 3);
+  margin-bottom: $space-m;
+}
+
+h4,
+h5,
+h6 {
+  font-size: $ms0;
+  line-height: calc($baseline * 3);
+  margin-bottom: $space-m;
+}
+
+p,
+ol,
+ul,
+dl,
+table,
+address,
+figure {
+  margin-bottom: $space-m;
+}
+
+ul,
+ol {
+  margin-left: $space-m;
+}
+
+li ul,
+li ol {
+  margin-bottom: 0;
+}
+
+blockquote {
+  font-style: italic;
+  font-size: $ms3;
+  line-height: calc($baseline * 4);
+  margin-bottom: $space-m;
+}
+
+figcaption {
+  font-size: $ms-1;
+  line-height: calc($baseline * 2);
+  margin-top: $space-xs;
+  color: $color-text-lighter;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: $color-border;
+  margin-bottom: $space-m;
+}
+
+a {
+  color: $color-primary;
+  transition: all 0.1s ease-in-out;
+}
+
+// a:visited {
+//   color: $color-primary;
+// }
+
+a:hover {
+  color: $color-primary-light;
+}
+
+a:active {
+  color: $color-primary-dark;
+}
+
+/*---------------------------------------/*
+ # OBJECTS
+/*---------------------------------------*/
+
+/*
+    Objects: list reset
+    ---
+    Resets the default list styles
+*/
+
+.o-list-reset {
+  list-style: none;
+  margin-left: 0;
+}
+
+/*
+    Object: Button reset
+    ---
+    Small button reset object
+*/
+
+.o-button-reset {
+  display: inline-block;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: inherit;
+
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
+}
+
+/*
+    Objects: Row
+    ---
+    Creates a horizontal row with padding
+*/
+
+.o-row {
+  padding: $space-m $space-m 0;
+  display: flow-root;
+}
+
+.o-row--primary {
+  background: $color-primary-dark;
+}
+
+.o-row--grey-dark {
+  background-color: get-color(color-gray, 800);
+  color: white;
+}
+
+.o-row--xs {
+  padding-top: $space-xs;
+  padding-bottom: $space-xs;
+}
+
+.o-row--l {
+  @include mq(bp2) {
+    padding: $space-xl $space-m $space-m;
+  }
+}
+
+.o-row--header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+}
+
+/*
+    Objects: Container
+    ---
+    Creates a horizontal container that sets de global max-width
+*/
+
+.o-container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: $container-max-width;
+}
+
+/*
+    Objects: Layout
+    ---
+    The layout object provides us with a column-style layout system. This object
+    contains the basic structural elements, but classes should be complemented
+    with width utilities
+*/
+
+.o-layout {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.o-layout__item {
+  flex-basis: 100%;
+}
+
+/* gutter modifiers, these affect o-layout__item too */
+
+.o-layout--gutter {
+  margin-left: calc($grid-gutter / -2);
+  margin-right: calc($grid-gutter / -2);
+}
+
+.o-layout--gutter > .o-layout__item {
+  padding-left: calc($grid-gutter / 2);
+  padding-right: calc($grid-gutter / 2);
+}
+
+.o-layout--gutter-s {
+  margin-left: calc($grid-gutter-s / -2);
+  margin-right: calc($grid-gutter-s / -2);
+}
+
+.o-layout--gutter-s > .o-layout__item {
+  padding-left: calc($grid-gutter-s / 2);
+  padding-right: calc($grid-gutter-s / 2);
+}
+
+.o-layout--gutter-l {
+  margin-left: calc($grid-gutter-l / -2);
+  margin-right: calc($grid-gutter-l / -2);
+}
+
+.o-layout--gutter-l > .o-layout__item {
+  padding-left: calc($grid-gutter-l / 2);
+  padding-right: calc($grid-gutter-l / 2);
+}
+
+/* reverse horizontal row modifier */
+
+.o-layout--row-reverse {
+  flex-direction: row-reverse;
+}
+
+.o-layout--collumn {
+  flex-direction: column;
+}
+
+/* Horizontal alignment modifiers*/
+
+.o-layout--justify-start {
+  justify-content: flex-start;
+}
+
+.o-layout--justify-end {
+  justify-content: flex-end;
+}
+
+.o-layout--justify-center {
+  justify-content: center;
+}
+
+.o-layout--justify-space-around {
+  justify-content: space-around;
+}
+
+.o-layout--justify-space-evenly {
+  justify-content: space-evenly;
+}
+
+.o-layout--justify-space-between {
+  justify-content: space-between;
+}
+
+/* Vertical alignment modifiers */
+
+.o-layout--align-start {
+  align-items: flex-start;
+}
+
+.o-layout--align-end {
+  align-items: flex-end;
+}
+
+.o-layout--align-center {
+  align-items: center;
+}
+
+.o-layout--align-baseline {
+  align-items: baseline;
+}
+
+/* Vertical alignment modifiers that only work if there is one than one flex item */
+
+.o-layout--align-content-start {
+  align-content: start;
+}
+
+.o-layout--align-content-end {
+  align-content: end;
+}
+
+.o-layout--align-content-center {
+  align-content: center;
+}
+
+.o-layout--align-content-space-around {
+  align-content: space-around;
+}
+
+.o-layout--align-content-space-between {
+  align-content: space-between;
+}
+
+/*------------------------------------*\
+  #COMPONENTS
+\*------------------------------------*/
+
+/*
+  Components: icon buttons
+  ---
+  The icon button component is used to display a button with an icon
+*/
+.c-title {
+  font-family: BebasNueLocal;
+  font-weight: bold;
+
+  &--index {
+    font-size: $ms10;
+  }
+}
+
+.c-dashboard {
+  text-align: center;
+  font-size: $ms6;
+  font-weight: normal;
+  &--curr-time {
+    margin-top: $space-m;
+    margin-bottom: 0;
+    font-size: $ms9;
+    line-height: 1;
+  }
+  &--past-time {
+    margin-bottom: 0;
+    font-size: $ms3;
+    font-weight: light;
+  }
+  &--degrees {
+    margin-top: $space-m;
+    font-weight: bold;
+    font-size: $ms11;
+    margin-bottom: 0;
+    // letter-spacing: 0rem;
+  }
+  &--speed {
+    margin-bottom: 0;
+  }
+  &--speed,
+  &--g-force {
+    font-size: $ms7;
+  }
+  &--temp-eng {
+    margin-bottom: 0;
+    line-height: 1;
+  }
+}
+
+.c-icon-button {
+  display: flex;
+  align-items: center;
+
+  svg {
+    fill: currentColor;
+  }
+}
+
+/*
+  Components: Logo
+  ---
+  The logo component is used to display the logo of the site
+*/
+
+.c-logo {
+  margin-bottom: 0;
+}
+
+.c-logo__link {
+  display: block;
+  height: calc($baseline * 4);
+}
+
+.c-logo__symbol {
+  display: block;
+  height: 100%;
+  width: auto;
+  fill: $oc-red-0;
+
+  &:hover {
+    fill: $oc-red-1;
+  }
+}
+
+/*
+  Components: Header
+  ---
+  The header component is used to display the header of the site
+*/
+
+.c-header {
+  display: flex;
+  align-items: center;
+  gap: $space-m;
+
+  @include mq(bp1, max) {
+    justify-content: space-between;
+  }
+}
+
+.c-header__user {
+  height: calc($baseline * 4);
+  border-radius: 100%;
+
+  @include mq(bp1) {
+    margin-left: auto;
+  }
+}
+
+.c-header__menu-button {
+  color: white;
+
+  @include mq(bp1) {
+    display: none;
+  }
+}
+
+/*
+  Components: Nav
+  ---
+  The nav component is used to display the navigation of the site
+*/
+
+.c-nav--header {
+  @include mq(bp1, max) {
+    display: none;
+  }
+}
+
+.c-nav__title {
+  font-size: 1rem;
+  color: currentColor;
+  margin-bottom: 0;
+}
+
+.c-nav__header {
+  display: flex;
+  align-items: center;
+  gap: $space-m;
+  justify-content: space-between;
+  margin-bottom: $space-m;
+}
+
+.c-nav__list {
+  margin-bottom: 0;
+
+  .c-nav--header & {
+    display: flex;
+    gap: $space-l;
+    align-items: center;
+  }
+}
+
+.c-nav__link:any-link {
+  display: flex;
+  font-weight: 600;
+  color: $oc-red-0;
+  text-decoration: none;
+  border-radius: $radius-m;
+
+  .c-nav__item--active & {
+    color: $oc-red-0;
+    background-color: $oc-red-9;
+    // padding: $space-xxs $space-xs;
+    padding: $space-xxs $space-s;
+  }
+
+  .c-nav--mobile & {
+    padding: $space-xxs $space-s;
+  }
+}
+
+.c-nav__link:hover {
+  color: $oc-red-0;
+}
+
+/*
+    Components: Buttons
+    ---
+    The button component is used to display buttons
+*/
+
+.c-button,
+.c-button:any-link {
+  display: inline-block;
+  padding: $space-xxs $space-s;
+  border-radius: $radius-m;
+  font-weight: 600;
+  text-decoration: none;
+  color: $oc-red-0;
+  background-color: $color-primary-dark;
+  border: 1px solid $color-primary-dark;
+  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-primary;
+  }
+}
+
+.c-button--meta,
+.c-button--meta:any-link {
+  color: $color-text-light;
+  background-color: white;
+  border-color: $color-border-dark;
+
+  &:hover {
+    background-color: $oc-gray-0;
+  }
+}
+/*
+    Components: Card
+    ---
+    The card component is used to display a card
+*/
+
+.c-card {
+  display: flow-root;
+  background-color: white;
+  border-radius: $radius-l;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+  margin-bottom: $space-m;
+  width: 100%;
+  color: $color-text-light;
+  text-decoration: none;
+  &--ride {
+    @include mq(bp1) {
+      margin-right: $space-s;
+      width: calc(50% - $space-s);
+    }
+    @include mq(bp3) {
+    }
+  }
+
+  &--rides {
+    @include mq(bp1) {
+      width: calc(50% - $space-s);
+      margin-right: $space-s;
+    }
+    @include mq(bp3) {
+      width: calc(33% - $space-s);
+    }
+    &:hover {
+      color: $color-text-light;
+      .c-card__title {
+        color: $color-primary;
+      }
+    }
+  }
+  &--ridecontainer {
+    @include mq(bp3) {
+      width: 70%;
+    }
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+  &__preview {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: $space-xs 0;
+    padding: 0 $space-xxs;
+    p {
+      margin-left: $space-xxs;
+    }
+  }
+  &__title {
+    font-weight: bold;
+    font-size: $ms5;
+    transition: 0.1s;
+  }
+  &__value {
+    margin-right: $space-m;
+    font-size: $ms3;
+  }
+
+  &__content {
+    padding: $space-xxs $space-xs 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    g & + & {
+      border-top: 1px solid $color-border;
+    }
+    &--ridetitle {
+      justify-content: flex-start;
+      img {
+        width: 2rem;
+        margin-left: $space-xxs;
+      }
+    }
+  }
+}
+.o-ride_head {
+  &__title {
+    line-height: 1;
+    margin-bottom: $space-xxs;
+  }
+  &__distance {
+    font-size: $ms6;
+  }
+  &__datetime {
+    font-size: $ms3;
+  }
+}
+.o-ride_info {
+  display: flex;
+  flex-direction: column;
+  @include mq(bp3) {
+    flex-direction: row;
+  }
+}
+
+.c-intro {
+  flex-direction: column;
+  @include mq(bp3) {
+    flex-direction: row;
+    margin-bottom: $space-m;
+  }
+  &--text {
+    text-align: center;
+    p {
+      width: 80%;
+      align-items: center;
+    }
+    @include mq(bp3) {
+      align-items: start;
+      text-align: left;
+    }
+  }
+}
+.o-options {
+  p {
+    margin-bottom: 0;
+  }
+  & > div:first-of-type {
+    margin-right: $space-xl;
+  }
+  &__title {
+    font-weight: bold;
+    margin-bottom: 0;
+    font-size: $ms6;
+  }
+  &__slider,
+  .c-switch {
+    margin-left: $space-xs;
+  }
+  &__slider {
+    opacity: 0;
+  }
+  .show {
+    opacity: 1;
+  }
+
+  $track-color: $color-primary-lighter;
+  $thumb-color: $color-primary-dark;
+  input[type="range"] {
+    opacity: 1;
+    // Remove default styles
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    // Set track styles
+    // width: 100%;
+    height: 8px;
+    background-color: lightgray;
+    border-radius: $radius;
+
+    // Set thumb styles
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      background-color: $thumb-color; // Customize the color here
+      border-radius: 50%;
+      cursor: pointer;
+      margin-top: -4px; // Adjust the thumb position vertically
+    }
+
+    &::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      background-color: $thumb-color; // Customize the color here
+      border-radius: 50%;
+      cursor: pointer;
+      margin-top: -4px; // Adjust the thumb position vertically
+    }
+
+    // Set track fill styles
+    &::-webkit-slider-runnable-track {
+      height: 8px;
+      background-color: $track-color; // Customize the color here
+      border-radius: $radius;
+    }
+
+    &::-moz-range-track {
+      height: 8px;
+      background-color: $track-color; // Customize the color here
+      border-radius: $radius;
+    }
+  }
+
+  @include mq(bp2) {
+    flex-direction: column;
+  }
+}
+
+.o-status-content {
+  @include mq(bp2) {
+    flex-wrap: nowrap;
+  }
+}
+
+.o-bike-image {
+  margin: $space-l;
+  display: grid;
+  img {
+    grid-row: 1;
+    grid-column: 1;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  .bike {
+    opacity: 1;
+  }
+  .show {
+    opacity: 1;
+  }
+  max-width: 40rem;
+}
+
+.c-switch {
+  display: flex;
+  margin-bottom: $space-xxs;
+
+  input {
+    // make input invisable
+    position: absolute !important;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    width: 1px;
+    border: 0;
+    overflow: hidden;
+  }
+
+  label {
+    background-color: $oc-white;
+    line-height: 1;
+    text-align: center;
+    padding: $space-xxs $space-m;
+    margin-right: -1px;
+    border: 1px solid $color-border;
+    transition: all 0.1s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:first-of-type {
+      border-radius: $radius 0 0 $radius;
+    }
+
+    &:last-of-type {
+      border-radius: 0 $radius $radius 0;
+    }
+  }
+
+  input:checked + label {
+    background-color: $color-primary-light;
+    color: $oc-white;
+    font-weight: bold;
+  }
+}
+
+$unit-of-speed: 50ms;
+
+.odometer {
+  margin: 0 auto;
+  font-size: 13vw;
+  height: 1em;
+  width: min-content;
+  line-height: 0;
+  box-sizing: content-box !important;
+  display: flex;
+  background: #222;
+  border-radius: $radius;
+  color: rgba(255, 255, 255, 0.9);
+  @include mq(bp2) {
+    // margin-left: 0;
+    font-size: 8vw;
+    @include mq(bp4) {
+      font-size: 5vw;
+    }
+  }
+}
+
+.digit {
+  display: inline-block;
+  height: 1em;
+  width: 0.59em;
+  overflow: hidden;
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0 0.2em;
+
+  &:first-child {
+    border-left: none;
+  }
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.digit-container {
+  line-height: 1em;
+  animation: slide 1 cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.digit-one {
+  animation-duration: 15 * $unit-of-speed;
+}
+
+.digit-ten {
+  animation-duration: 20 * $unit-of-speed;
+}
+
+.digit-hundred {
+  animation-duration: 25 * $unit-of-speed;
+}
+
+.digit-one-thousands {
+  animation-duration: 30 * $unit-of-speed;
+}
+
+.digit-ten-thousands {
+  animation-duration: 35 * $unit-of-speed;
+}
+
+.digit-hundred-thousands {
+  animation-duration: 40 * $unit-of-speed;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateY(-10em);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/*
+  Components: mobile nav
+  ---
+  The mobile nav component is used to display the mobile navigation
+*/
+
+.c-mobile-nav {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  overflow-y: auto;
+  padding-right: $space-m;
+}
+
+.c-mobile-nav__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: black;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.c-mobile-nav__body {
+  position: relative;
+  background-color: $color-primary-dark;
+  color: white;
+  padding: $space-m;
+  height: 100%;
+  opacity: 0;
+  translate: -100% 0;
+  transition: all 0.2s ease;
+}
+
+/*
+  State: has-mobile-nav
+  ---
+  The has-mobile-nav state is to show the mobile nav and to prevent the body from scrolling when the mobile nav is open
+*/
+
+.has-mobile-nav {
+  .c-mobile-nav {
+    pointer-events: all;
+  }
+  .c-mobile-nav__body {
+    opacity: 1;
+    translate: none;
+  }
+  .c-mobile-nav__overlay {
+    opacity: 0.5;
+  }
+}
+
+.c-weather {
+  &--description {
+    text-transform: capitalize;
+  }
+  &--temp {
+    font-weight: bold;
+    font-size: $ms8;
+    margin-bottom: 0;
+  }
+  &--location {
+    margin-bottom: $space-xs;
+  }
+}
+
+/*---------------------------------------/*
+ # UTILITIES
+/*---------------------------------------*/
+// .map{
+//   max-width: 50rem;
+//   align-self: center;
+// }
+#mapid {
+  // max-height: 70vh;
+  // min-height:50vh;
+  // max-width: 80rem;
+  // min-width: 20rem;
+  width: 100%;
+  padding-top: 60%;
+  // margin: 0 10%;
+  // margin-bottom: 1rem;
+  z-index: 0;
+  margin-bottom: $space-xl;
+  // max-width: 70rem;
+  // max-height: 2rem;
+
+  @include mq(bp2) {
+    padding-top: 40%;
+  }
+}
